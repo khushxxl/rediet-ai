@@ -64,16 +64,9 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${poppins_extrabold.variable} ${poppins_bold.variable}`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          {children}
-          <Analytics />
-        </ThemeProvider>
+        <Navbar />
+        {children}
+        <Analytics />
       </body>
     </html>
   );
