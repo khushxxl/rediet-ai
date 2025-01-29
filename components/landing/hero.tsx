@@ -1,3 +1,4 @@
+"use client";
 import {
   ChatBubbleIcon,
   HeartIcon,
@@ -7,6 +8,8 @@ import {
 import Image from "next/image";
 import React from "react";
 import HeroImage from "../../app/assets/hero-img.png";
+import { motion } from "framer-motion";
+
 function Hero() {
   const features = [
     {
@@ -41,7 +44,13 @@ function Hero() {
     description: string;
   }) => {
     return (
-      <div className="flex flex-col space-y-4 justify-center items-start border border-gray-200 dark:border-gray-700 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800 w-[300px]">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        whileHover={{ scale: 1.05 }}
+        className="flex flex-col space-y-4 justify-center items-start border border-gray-200 dark:border-gray-700 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800 w-[300px]"
+      >
         <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-xl">
           {feature.icon}
         </div>
@@ -51,20 +60,25 @@ function Hero() {
         <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
           {feature.description}
         </p>
-      </div>
+      </motion.div>
     );
   };
 
   return (
     <div className="flex flex-col items-center min-h-screen pb-20 px-6 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
-      <div className="text-center max-w-4xl mx-auto mt-5">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center max-w-4xl mx-auto mt-5"
+      >
         <h1 className="text-5xl text-black font-bold">Welcome to Rediet AI</h1>
         <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-5">
           Your intelligent companion for achieving optimal health. Track your
           nutrition, exercise goals, and get personalized responses - all in one
           place.
         </p>
-      </div>
+      </motion.div>
       {/* <div className="mt-10 cursor-pointer">
         <img
           src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
@@ -72,13 +86,23 @@ function Hero() {
         />
       </div> */}
 
-      <div className="flex flex-col lg:flex-row justify-between items-center w-full max-w-7xl gap-10 mt-12">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.2 }}
+        className="flex flex-col lg:flex-row justify-between items-center w-full max-w-7xl gap-10 mt-12"
+      >
         <div className="grid grid-cols-1 gap-6">
           <FeatureCard {...features[0]} />
           <FeatureCard {...features[1]} />
         </div>
 
-        <div className="relative w-full max-w-md">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative w-full max-w-md"
+        >
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl" />
           <Image
             src={HeroImage}
@@ -87,13 +111,13 @@ function Hero() {
             height={400}
             className="relative z-10 hover:scale-105 transition-transform duration-300"
           />
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 gap-6">
           <FeatureCard {...features[2]} />
           <FeatureCard {...features[3]} />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
